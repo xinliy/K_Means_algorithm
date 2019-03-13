@@ -17,10 +17,12 @@ class K_Means:
         self.center_number=center_number
         self.tolerance_value=tolerance_value
         self.iteration_time=iteration_time
+        self.data_dim=None
 
     #To realize the K_Means algorithm
     def fit(self,dataSet):
         self.center_dictionary={}
+        self.data_dim=dataSet.shape[1]
         # Get the origin center points
         for i in range(self.center_number):
             self.center_dictionary[i] = dataSet[i]
@@ -51,7 +53,7 @@ class K_Means:
             right_center_point=0
             print(ownership_dictionary)
             for every_center in range(self.center_number):
-                new_center=np.asarray([0,0])
+                new_center=np.zeros(self.data_dim)
                 for every_point in ownership_dictionary[every_center]:
                     new_center+=dataSet[every_point]
                 new_center=new_center/len(ownership_dictionary[every_center])
